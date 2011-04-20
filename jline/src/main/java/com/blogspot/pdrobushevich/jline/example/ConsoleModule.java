@@ -7,7 +7,7 @@ public class ConsoleModule extends AbstractConsoleModule {
 
     @Override
     protected Command[] getCommands() {
-        return new Command[]{new HelloCommand()};
+        return new Command[]{new HelloCommand(), new CutCommand()};
     }
 
 }
