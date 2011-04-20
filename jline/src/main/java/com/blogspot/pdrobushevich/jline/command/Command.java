@@ -8,7 +8,7 @@ public interface Command {
 
     String getDescription();
 
-    String execute(final String[] args);
+    String execute(final String[] args) throws InterruptedException;
 
     Completor[] getArgCompletors();
 

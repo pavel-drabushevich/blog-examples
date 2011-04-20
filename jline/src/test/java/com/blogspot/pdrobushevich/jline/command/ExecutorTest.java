@@ -15,31 +15,31 @@ public class ExecutorTest {
     private final static Map<String, Command> EMPTY_COMMANDS = newHashMap();
 
     @Test
-    public void testNullLine() {
+    public void testNullLine() throws InterruptedException {
         Executor executor = new Executor(EMPTY_COMMANDS);
         assertNull(executor.execute(null));
     }
 
     @Test
-    public void testNullCommands() {
+    public void testNullCommands() throws InterruptedException {
         Executor executor = new Executor(null);
         assertNull(executor.execute(null));
     }
 
     @Test
-    public void testEmptyLine() {
+    public void testEmptyLine() throws InterruptedException {
         Executor executor = new Executor(EMPTY_COMMANDS);
         assertNull(executor.execute(EMPTY));
     }
 
     @Test(expected = UnsupportedCommand.class)
-    public void testUnsupportedCommand() {
+    public void testUnsupportedCommand() throws InterruptedException {
         Executor executor = new Executor(EMPTY_COMMANDS);
         executor.execute("test");
     }
 
     @Test
-    public void testCommandWithoutArgs() {
+    public void testCommandWithoutArgs() throws InterruptedException {
         Command command = mock(Command.class);
         when(command.execute(new String[0])).thenReturn("test");
         Map<String, Command> commands = new ImmutableMap.Builder<String, Command>().put("test", command).build();
@@ -49,7 +49,7 @@ public class ExecutorTest {
     }
 
     @Test
-    public void testCommandWithArgs() {
+    public void testCommandWithArgs() throws InterruptedException {
         Command command = mock(Command.class);
         String[] args = {"arg1", "arg2"};
         when(command.execute(args)).thenReturn("test");
@@ -60,7 +60,7 @@ public class ExecutorTest {
     }
 
     @Test
-    public void testFewCommands() {
+    public void testFewCommands() throws InterruptedException {
         Command command1 = mock(Command.class);
         when(command1.execute(new String[0])).thenReturn("test1");
         Command command2 = mock(Command.class);

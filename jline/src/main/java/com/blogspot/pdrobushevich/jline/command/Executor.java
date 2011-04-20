@@ -21,14 +21,13 @@ public class Executor {
     }
 
     /**
-     *
      * Parse line to command name and arguments
      *
      * @param line
      * @return command execution result
      * @throws UnsupportedCommand - if command isn't found
      */
-    public String execute(final String line) throws UnsupportedCommand {
+    public String execute(final String line) throws UnsupportedCommand, InterruptedException {
         if (isBlank(line)) {
             return null;
         }
