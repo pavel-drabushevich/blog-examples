@@ -1,0 +1,74 @@
+<project name="CodeCover" default="create.report">
+
+	<property name="codecover.dir" value="lib" />
+	<property name="source.dir" value="src" />
+	<property name="instrumented.source.dir" value="instrumented" />
+
+	<property name="resources.dir" value="resources" />
+
+	<property name="target.dir" value="bin" />
+
+	<taskdef name="codecover" classname="org.codecover.ant.CodecoverTask" classpath="${codecover.dir}/codecover-ant.jar" />
+
+	<fileset dir="${codecover.dir}" id="libs.fileset">
+		<include name="org.codecover.instrumentation.java15-0.1.jar" />
+	</fileset>
+
+	<path id="compile.sources.classpath">
+		<fileset refid="libs.fileset" />
+	</path>
+
+	<path id="run.classpath">
+		<fileset refid="libs.fileset" />
+		<pathelement location="${target.dir}" />
+	</path>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="." includes="*.clf" />
+		</delete>
+		<delete file="codecover.xml" />
+		<delete file="report.html" />
+		<delete dir="report.html-files" />
+	</target>
+
+	<target name="instrument.sources" depends="clean">
+		<codecover>
+			<instrument containerId="c" language="java" destination="${instrumented.source.dir}" charset="utf-8" copyUninstrumented="yes">
+				<source dir="${source.dir}">
+					<include name="**/*.java" />
+				</source>
+			</instrument>
+			<save containerId="c" filename="codecover.xml" />
+		</codecover>
+	</target>
+
+	<target name="compile.instrumented" depends="instrument.sources">
+		<javac srcdir="${instrumented.source.dir}" destdir="${target.dir}" encoding="utf-8" target="1.5" debug="true" includeAntRuntime="false">
+			<classpath refid="compile.sources.classpath" />
+		</javac>
+	</target>
+
+	<target name="run.instrumented" depends="compile.instrumented">
+		<java fork="true" failonerror="true" classname="me.drobushevich.blog.codecover.Main">
+			<jvmarg value="-Dorg.codecover.coverage-log-file=codecover.clf" />
+			<classpath refid="run.classpath" />
+		</java>
+	</target>
+
+	<target name="create.report" depends="run.instrumented">
+		<codecover>
+			<load containerId="c" filename="codecover.xml" />
+			<analyze containerId="c" coverageLog="codecover.clf" name="Run session 1" />
+			<save containerId="c" filename="codecover.xml" />
+
+			<report containerId="c" destination="report.html" template="${resources.dir}/report-templates/HTML_Report_hierarchic.xml">
+				<testCases>
+					<testSession pattern=".*">
+						<testCase pattern=".*" />
+					</testSession>
+				</testCases>
+			</report>
+		</codecover>
+	</target>
+</project>

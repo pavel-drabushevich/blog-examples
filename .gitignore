@@ -2,4 +2,7 @@
 *.ipr
 *.iws
 *.iml
+.classpath
+.project
 *.class
+/jline/target
