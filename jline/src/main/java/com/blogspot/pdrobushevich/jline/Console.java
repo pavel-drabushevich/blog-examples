@@ -20,7 +20,6 @@ public class Console {
     private final Executor executor;
     private final String helpCommandName;
 
-    // TODO: inject ConsoleReader, don't create
     @Inject
     public Console(final Executor executor, final Completor commandsCompletor) throws IllegalStateException {
         this.executor = executor;
