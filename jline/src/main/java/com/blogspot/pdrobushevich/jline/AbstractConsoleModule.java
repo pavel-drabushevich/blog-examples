@@ -21,8 +21,8 @@ public abstract class AbstractConsoleModule extends AbstractModule {
         }
 
         bind(Completor.class).to(CommandsCompletor.class);
-        bind(Executor.class).to(Executor.class);
-        bind(Console.class).to(Console.class);
+//        bind(Executor.class).to(Executor.class);
+//        bind(Console.class).to(Console.class);
     }
 
     protected abstract Command[] getCommands();

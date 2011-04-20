@@ -1,0 +1,23 @@
+<assembly>
+    <id>package</id>
+    <formats>
+        <format>dir</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources/scripts</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>*.ksh</include>
+                <include>*.cmd</include>
+            </includes>
+            <lineEnding>lf</lineEnding>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+</assembly>
