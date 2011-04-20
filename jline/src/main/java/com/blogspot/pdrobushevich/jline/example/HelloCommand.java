@@ -23,7 +23,7 @@ public class HelloCommand implements Command {
 
     @Override
     public String[] getArgs() {
-        return new String[]{"word"};
+        return new String[]{"world"};
     }
 
     @Override
