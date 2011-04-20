@@ -17,7 +17,10 @@ public class HelloCommand implements Command {
     }
 
     @Override
-    public String execute(String[] args) throws InterruptedException {
+    public String execute(final String[] args) throws InterruptedException {
+        if (args == null || args.length == 0) {
+            return "hello command must have one argument: word";
+        }
         return "Hello " + args[0] + "!";
     }
 
