@@ -53,10 +53,21 @@ public class ExecutorTest {
         Command command = mock(Command.class);
         String[] args = {"arg1", "arg2"};
         when(command.execute(args)).thenReturn("test");
+        when(command.getArgs()).thenReturn(new String[]{"a1", "a2"});
         Map<String, Command> commands = new ImmutableMap.Builder<String, Command>().put("test", command).build();
         Executor executor = new Executor(commands);
         assertEquals("test", executor.execute("test arg1 arg2 "));
         verify(command).execute(args);
+    }
+
+    @Test
+    public void testCommandIncorrectArgs() throws InterruptedException {
+        Command command = mock(Command.class);
+        String[] args = {"arg1", "arg2"};
+        when(command.getArgs()).thenReturn(new String[]{"a1", "a2"});
+        Map<String, Command> commands = new ImmutableMap.Builder<String, Command>().put("test", command).build();
+        Executor executor = new Executor(commands);
+        assertEquals("Command [test] must have 2 arguments", executor.execute("test arg1 "));
     }
 
     @Test

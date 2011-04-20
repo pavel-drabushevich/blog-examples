@@ -36,10 +36,16 @@ public class Executor {
         if (!commands.containsKey(commandName)) {
             throw new UnsupportedCommand(commandName);
         }
+        Command command = commands.get(commandName);
+        String[] args = command.getArgs();
+        int expectedArgsLength = args == null ? 0 : args.length;
+        if (splited.length - 1 != expectedArgsLength) {
+            return "Command [" + commandName + "] must have " + expectedArgsLength + " arguments";
+        }
         if (splited.length == 1) {
-            return commands.get(commandName).execute(new String[0]);
+            return command.execute(new String[0]);
         } else {
-            return commands.get(commandName).execute(prepareArgs(splited));
+            return command.execute(prepareArgs(splited));
         }
     }
 

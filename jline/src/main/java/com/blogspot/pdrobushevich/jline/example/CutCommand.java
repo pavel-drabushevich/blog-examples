@@ -23,9 +23,6 @@ public class CutCommand implements Command {
 
     @Override
     public String execute(final String[] args) throws InterruptedException {
-        if (args == null || args.length == 0) {
-            return "cut command must have one argument: file name";
-        }
         File file = new File(args[0]);
         if (!file.exists() && file.isFile()) {
             return "File '" + file.getAbsolutePath() + "' doesn't exist.";
