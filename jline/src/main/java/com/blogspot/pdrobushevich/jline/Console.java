@@ -38,11 +38,12 @@ public class Console {
         String line;
         while ((line = reader.readLine(">>> ")) != null) {
             try {
-                String result = null;
+                String result;
                 try {
                     result = executor.execute(line);
                 } catch (InterruptedException e) {
                     out.println("exit");
+                    break;
                 }
                 if (isNotBlank(result)) {
                     out.println(result);
