@@ -25,6 +25,11 @@ public class HelloCommand implements Command {
     }
 
     @Override
+    public String[] getArgs() {
+        return new String[]{"word"};
+    }
+
+    @Override
     public Completor[] getArgCompletors() {
         return new Completor[]{new SimpleCompletor(new String[]{"word"})};
     }

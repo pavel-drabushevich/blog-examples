@@ -38,6 +38,11 @@ public class CutCommand implements Command {
     }
 
     @Override
+    public String[] getArgs() {
+        return new String[]{"file name"};
+    }
+
+    @Override
     public Completor[] getArgCompletors() {
         return new Completor[]{new FileNameCompletor()};
     }

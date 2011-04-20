@@ -20,6 +20,11 @@ public class ExitCommand implements Command {
     }
 
     @Override
+    public String[] getArgs() {
+        return null;
+    }
+
+    @Override
     public Completor[] getArgCompletors() {
         return null;
     }

@@ -10,6 +10,8 @@ public interface Command {
 
     String execute(final String[] args) throws InterruptedException;
 
+    String[] getArgs();
+
     Completor[] getArgCompletors();
 
 }
