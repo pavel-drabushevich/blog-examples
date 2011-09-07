@@ -5,3 +5,4 @@
 *.class
 /jline/target
 /screener/.settings/
+pipeline/core/target/*

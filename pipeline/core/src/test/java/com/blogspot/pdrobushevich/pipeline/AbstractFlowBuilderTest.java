@@ -7,6 +7,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.reader;
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.transform;
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.writer;
+
 public class AbstractFlowBuilderTest {
 
     @Test(expected = InitException.class)
@@ -65,18 +69,6 @@ public class AbstractFlowBuilderTest {
 
     private AbstractFlowBuilder builder() {
         return spy(new MockFlowBuilder(mock(Flow.class)));
-    }
-
-    private Reader reader() {
-        return mock(Reader.class);
-    }
-
-    private Writer writer() {
-        return mock(Writer.class);
-    }
-
-    private Transform transform() {
-        return mock(Transform.class);
     }
 
     protected static class MockFlowBuilder extends AbstractFlowBuilder {

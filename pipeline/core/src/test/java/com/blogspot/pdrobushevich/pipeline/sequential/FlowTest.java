@@ -6,13 +6,12 @@ import com.blogspot.pdrobushevich.pipeline.Reader;
 import com.blogspot.pdrobushevich.pipeline.Transform;
 import com.blogspot.pdrobushevich.pipeline.Writer;
 import org.junit.Test;
-import org.mockito.stubbing.OngoingStubbing;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.reader;
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.transform;
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.writer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class FlowTest {
 
@@ -63,37 +62,6 @@ public class FlowTest {
         verify(writer).write(doc1);
         verify(writer).write(doc2);
         verify(writer, times(0)).write(null);
-    }
-
-    private Reader reader(final Document... docs) {
-        final Reader reader = mock(Reader.class);
-        OngoingStubbing<Boolean> hasNextStub = when(reader.hasNext());
-        for (final Document doc : docs) {
-            hasNextStub = hasNextStub.thenReturn(true);
-        }
-        hasNextStub.thenReturn(false);
-        OngoingStubbing<Document> nextStub = when(reader.next());
-        for (final Document doc : docs) {
-            nextStub = nextStub.thenReturn(doc);
-        }
-        nextStub.thenReturn(null);
-        return reader;
-    }
-
-    private Writer writer(final Document... docs) {
-        final Writer writer = mock(Writer.class);
-        for (final Document doc : docs) {
-            doNothing().when(writer).write(doc);
-        }
-        return writer;
-    }
-
-    private Transform transform(final Document... docs) {
-        final Transform transform = mock(Transform.class);
-        for (final Document doc : docs) {
-            when(transform.apply(doc)).thenReturn(doc);
-        }
-        return transform;
     }
 
 }
