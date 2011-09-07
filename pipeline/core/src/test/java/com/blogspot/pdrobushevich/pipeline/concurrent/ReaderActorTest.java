@@ -21,6 +21,7 @@ public class ReaderActorTest implements ReadListener {
         readerActor.read();
         wait();
         verify(next, times(0)).apply(null);
+        verify(next).complete();
     }
 
     @Test
@@ -38,6 +39,7 @@ public class ReaderActorTest implements ReadListener {
         verify(next).apply(doc1);
         verify(next).apply(doc2);
         verify(next, times(0)).apply(null);
+        verify(next).complete();
     }
 
     @Override
