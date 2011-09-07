@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 
 public class ReaderActorTest implements ReadListener {
 
-    @Test
+    @Test(timeout = 1000)
     public synchronized void testNothing() throws Exception {
         final Reader reader = reader();
         final Evaluator next = mock(Evaluator.class);
@@ -24,7 +24,7 @@ public class ReaderActorTest implements ReadListener {
         verify(next).complete();
     }
 
-    @Test
+    @Test(timeout = 1000)
     public synchronized void testRead() throws Exception {
         final Document doc1 = new Document();
         doc1.put("id", 1);

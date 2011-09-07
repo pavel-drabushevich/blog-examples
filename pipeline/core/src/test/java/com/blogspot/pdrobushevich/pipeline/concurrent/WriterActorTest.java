@@ -2,33 +2,31 @@ package com.blogspot.pdrobushevich.pipeline.concurrent;
 
 import akka.actor.TypedActor;
 import com.blogspot.pdrobushevich.pipeline.Document;
-import com.blogspot.pdrobushevich.pipeline.Transform;
+import com.blogspot.pdrobushevich.pipeline.Writer;
 import org.junit.Test;
 
-import static com.blogspot.pdrobushevich.pipeline.FlowUtils.transform;
-import static org.mockito.Mockito.mock;
+import static com.blogspot.pdrobushevich.pipeline.FlowUtils.writer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class TransformActorTest implements EvaluateListener {
+public class WriterActorTest implements EvaluateListener {
 
     @Test(timeout = 1000)
-    public synchronized void testApply() throws Exception {
+    public synchronized void testWrite() throws Exception {
         final Document doc = new Document();
-        final Transform transform = transform(doc);
-        final Evaluator next = mock(Evaluator.class);
+        final Writer writer = writer(doc);
         Evaluator transformActor = TypedActor.newInstance(Evaluator.class,
-                TransformActor.factory(transform, next, this));
+                WriterActor.factory(writer, this));
         transformActor.apply(doc);
         transformActor.complete();
         wait();
-        verify(next).apply(doc);
-        verify(next, times(0)).apply(null);
-        verify(next).complete();
+        verify(writer).write(doc);
+        verify(writer, times(0)).write(null);
     }
 
     @Override
     public synchronized void onComplete() {
         notify();
     }
+
 }
