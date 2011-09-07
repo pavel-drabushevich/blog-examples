@@ -26,7 +26,12 @@ public class TransformActor extends TypedActor implements Evaluator {
     @Override
     public void complete() {
         next.complete();
-        listener.onComplete();
+        if (listener != null)
+            listener.onComplete();
+    }
+
+    public static TypedActorFactory factory(final Transform transform, final Evaluator next) {
+        return factory(transform, next, null);
     }
 
     public static TypedActorFactory factory(final Transform transform, final Evaluator next, final EvaluateListener listener) {

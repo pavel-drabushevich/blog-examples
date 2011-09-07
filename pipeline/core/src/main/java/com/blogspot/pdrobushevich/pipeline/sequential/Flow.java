@@ -34,7 +34,7 @@ public class Flow implements com.blogspot.pdrobushevich.pipeline.Flow {
         return new Builder();
     }
 
-    private final static class Builder extends AbstractFlowBuilder {
+    private static class Builder extends AbstractFlowBuilder {
 
         @Override
         protected Flow flow(final Reader reader, final Transform[] transforms, final Writer writer) {
