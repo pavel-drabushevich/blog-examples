@@ -14,3 +14,7 @@ screener
 -----------------------
 Create simple UI PoC of [Google Finance StockScreener](http://www.google.com/finance/stockscreener). Filtering table content with slider. Use jquery UI Slider and DataTables libraries. [More](http://pdrobushevich.blogspot.com/2011/05/jquery-slider-table.html)
 
+pipeline
+-----------------------
+Simple example how to use Akka Typed actors (version 1.1.3). [More](http://pdrobushevich.blogspot.com/2011/09/akka-actors.html)
+
