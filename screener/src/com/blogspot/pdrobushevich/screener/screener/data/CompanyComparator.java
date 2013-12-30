@@ -19,9 +19,9 @@ public class CompanyComparator implements Comparator<Company> {
         } else if ("Symbol".equalsIgnoreCase(sortedColumn)) {
             return company1.getSymbol().compareTo(company2.getSymbol()) * sortDirection;
         } else if ("Market cap.".equalsIgnoreCase(sortedColumn)) {
-            return (int) (company1.getMktCap() - company2.getMktCap()) * sortDirection;
+            return Double.compare(company1.getMktCap(), company2.getMktCap()) * sortDirection;
         } else if ("Price".equalsIgnoreCase(sortedColumn)) {
-            return (int) (company1.getPrice() - company2.getPrice()) * sortDirection;
+            return Double.compare(company1.getPrice(), company2.getPrice()) * sortDirection;
         }
         return 0;
     }
